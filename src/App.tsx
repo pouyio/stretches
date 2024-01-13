@@ -39,7 +39,7 @@ const Timer: React.FC<{ expireTime: Date; onExpire: () => void }> = ({
 const App = () => {
   const [index, setIndex] = useState(0);
   const [nextTime, setNextTime] = useState<Date>();
-  const { isSupported, released, request, release } = useWakeLock();
+  const { request, release } = useWakeLock();
 
   useEffect(() => {
     request();
