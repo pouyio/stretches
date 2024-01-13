@@ -66,9 +66,18 @@ const App = () => {
   return (
     <>
       <h2>{exercises[index].name}</h2>
+      {exercises[index].img && (
+        <img src={`/${exercises[index].img}`} alt="execise" />
+      )}
       {nextName && <p>Next: {nextName}</p>}
       {nextName && <p>Remaining: {exercisesRemaining}</p>}
-      {!!nextTime && <Timer expireTime={nextTime} onExpire={onExpire} />}
+      {!!nextTime && (
+        <Timer
+          expireTime={nextTime}
+          onExpire={onExpire}
+          duration={exercises[index].seconds}
+        />
+      )}
       <div>
         <button onClick={() => setIndex((i) => i - 1)}>Pre</button>
         <button onClick={() => setIndex((i) => i + 1)}>Next</button>
