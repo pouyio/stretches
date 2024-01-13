@@ -1,49 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useTimer } from "react-timer-hook";
-import "./App.css";
+import { useEffect, useState } from "react";
 import { useWakeLock } from "react-screen-wake-lock";
+import "./App.css";
+import exercises from "./assets/exercises.json";
+import { Timer } from "./components/Timer";
 
-const exercises = [
-  { name: "Psoas stretch, left", seconds: 2 },
-  { name: "Psoas stretch, right", seconds: 120 },
-];
-
-const Timer: React.FC<{ expireTime: Date; onExpire: () => void }> = ({
-  expireTime,
-  onExpire,
-}) => {
-  const { isRunning, minutes, seconds, start, resume, pause, restart } =
-    useTimer({
-      expiryTimestamp: expireTime,
-      onExpire,
-    });
-
-  useEffect(() => {
-    restart(expireTime);
-  }, [expireTime]);
-
-  return (
-    <>
-      <p>
-        {minutes}:{seconds}
-      </p>
-      <button onClick={start}>Start</button>
-      {isRunning ? (
-        <button onClick={pause}>Pause</button>
-      ) : (
-        <button onClick={resume}>Resume</button>
-      )}
-    </>
-  );
-};
 const App = () => {
-  const [index, setIndex] = useState(0);
-  const [start, setStart] = useState(false);
+  const [index, setIndex] = useState(-1);
   const [nextTime, setNextTime] = useState<Date>();
   const { request, release } = useWakeLock();
 
   useEffect(() => {
-    if (!exercises.at(index)) {
+    if (index === -1 || index === exercises.length) {
       return;
     }
     const time = new Date();
@@ -55,24 +22,21 @@ const App = () => {
     setIndex((i) => i + 1);
   };
 
-  if (!exercises.at(index)) {
+  if (index === exercises.length) {
     release();
     return (
       <>
         <h1>Finished!!</h1>
-        <a href=".">
-          <button>Start Again</button>
-        </a>
       </>
     );
   }
 
-  if (!start) {
+  if (index === -1) {
     return (
       <button
         onClick={() => {
           request();
-          setStart(true);
+          setIndex(0);
         }}
       >
         Start now
