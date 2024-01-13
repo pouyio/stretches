@@ -67,7 +67,11 @@ const App = () => {
     <>
       <h2>{exercises[index].name}</h2>
       {exercises[index].img && (
-        <img src={`/${exercises[index].img}`} alt="execise" />
+        <img
+          style={{ maxWidth: "100%" }}
+          src={`/${exercises[index].img}`}
+          alt="execise"
+        />
       )}
       {nextName && <p>Next: {nextName}</p>}
       {nextName && <p>Remaining: {exercisesRemaining}</p>}
