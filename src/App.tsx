@@ -38,18 +38,9 @@ const Timer: React.FC<{ expireTime: Date; onExpire: () => void }> = ({
 };
 const App = () => {
   const [index, setIndex] = useState(0);
+  const [start, setStart] = useState(false);
   const [nextTime, setNextTime] = useState<Date>();
-  const { isSupported, request, release } = useWakeLock({
-    onError: console.error,
-    onRelease: console.log,
-    onRequest: console.warn,
-  });
-
-  console.log({ isSupported });
-
-  useEffect(() => {
-    request().then(console.log).catch(console.error);
-  }, []);
+  const { request, release } = useWakeLock();
 
   useEffect(() => {
     if (!exercises.at(index)) {
@@ -65,7 +56,7 @@ const App = () => {
   };
 
   if (!exercises.at(index)) {
-    release().then(console.log).catch(console.error);
+    release();
     return (
       <>
         <h1>Finished!!</h1>
@@ -73,6 +64,19 @@ const App = () => {
           <button>Start Again</button>
         </a>
       </>
+    );
+  }
+
+  if (!start) {
+    return (
+      <button
+        onClick={() => {
+          request();
+          setStart(true);
+        }}
+      >
+        Start now
+      </button>
     );
   }
 
