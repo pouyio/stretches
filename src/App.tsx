@@ -25,7 +25,7 @@ const App = () => {
   }, [index]);
 
   const onExpire = () => {
-    if (index !== exercises.length - 1) {
+    if (index !== exercises.length - 1 && exercises[index].name !== "Rest") {
       playExercise();
     }
     setIndex((i) => i + 1);
@@ -54,9 +54,20 @@ const App = () => {
     );
   }
 
+  const name = exercises[index].name;
+  const nextName =
+    name === "Rest"
+      ? exercises.at(index + 1)?.name
+      : exercises.at(index + 2)?.name;
+  const exercisesRemaining = exercises
+    .slice(index)
+    .filter((e) => e.name !== "Rest").length;
+
   return (
     <>
       <h2>{exercises[index].name}</h2>
+      {nextName && <p>Next: {nextName}</p>}
+      {nextName && <p>Remaining: {exercisesRemaining}</p>}
       {!!nextTime && <Timer expireTime={nextTime} onExpire={onExpire} />}
       <div>
         <button onClick={() => setIndex((i) => i - 1)}>Pre</button>

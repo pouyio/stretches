@@ -1,9 +1,15 @@
 [
   { "name": "Psoas stretch, LEFT", "seconds": 25 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Psoas stretch, RIGHT", "seconds": 25 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Glute bridges", "seconds": 50 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Chest openers", "seconds": 25 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Modified McKenzie", "seconds": 25 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Reverse Wall Plank", "seconds": 60 },
+  { "name": "Rest", "seconds": 10 },
   { "name": "Cervico-Thoracic Traction", "seconds": 120 }
 ]
