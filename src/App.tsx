@@ -55,10 +55,8 @@ const App = () => {
   }
 
   const name = exercises[index].name;
-  const nextName =
-    name === "Rest"
-      ? exercises.at(index + 1)?.name
-      : exercises.at(index + 2)?.name;
+  const nextExercise =
+    name === "Rest" ? exercises.at(index + 1) : exercises.at(index + 2);
   const exercisesRemaining = exercises
     .slice(index)
     .filter((e) => e.name !== "Rest").length;
@@ -73,8 +71,17 @@ const App = () => {
           alt="execise"
         />
       )}
-      {nextName && <p>Next: {nextName}</p>}
-      {nextName && <p>Remaining: {exercisesRemaining}</p>}
+      {nextExercise && name === "Rest" && (
+        <>
+          <p>Next: {nextExercise.name}</p>
+          <img
+            style={{ maxWidth: "100%" }}
+            src={`/${nextExercise.img}`}
+            alt="execise"
+          />
+        </>
+      )}
+      {nextExercise && <p>Remaining: {exercisesRemaining}</p>}
       {!!nextTime && (
         <Timer
           expireTime={nextTime}
