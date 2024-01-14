@@ -6,16 +6,17 @@ export const Timer: React.FC<{
   onExpire: () => void;
   duration: number;
 }> = ({ expireTime, onExpire, duration }) => {
-  const { isRunning, minutes, seconds, resume, pause, restart } = useTimer({
-    expiryTimestamp: expireTime,
-    onExpire,
-  });
+  const { isRunning, minutes, seconds, resume, pause, restart, totalSeconds } =
+    useTimer({
+      expiryTimestamp: expireTime,
+      onExpire,
+    });
 
   useEffect(() => {
     restart(expireTime);
   }, [expireTime]);
 
-  const progress = (duration - seconds) / duration;
+  const progress = (duration - totalSeconds) / duration;
 
   return (
     <>
