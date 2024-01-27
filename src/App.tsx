@@ -7,6 +7,7 @@ import endExercise from "./assets/end_exercise.wav";
 import end from "./assets/end.wav";
 import exercises from "./assets/exercises.json";
 import { Timer } from "./components/Timer";
+import { Button } from "./components/Button";
 
 const App = () => {
   const [index, setIndex] = useState(-1);
@@ -43,57 +44,84 @@ const App = () => {
 
   if (index === -1) {
     return (
-      <button
+      <Button
         onClick={() => {
           request();
           setIndex(0);
         }}
       >
         Start now
-      </button>
+      </Button>
     );
   }
 
   const name = exercises[index].name;
   const nextExercise =
     name === "Rest" ? exercises.at(index + 1) : exercises.at(index + 2);
+
+  const isResting = name === "Rest";
+
+  exercises;
   const exercisesRemaining = exercises
     .slice(index)
     .filter((e) => e.name !== "Rest").length;
 
   return (
-    <>
-      <h2>{exercises[index].name}</h2>
-      {exercises[index].img && (
-        <img
-          style={{ maxWidth: "100%" }}
-          src={`/${exercises[index].img}`}
-          alt="execise"
-        />
-      )}
-      {nextExercise && name === "Rest" && (
-        <>
-          <p>Next: {nextExercise.name}</p>
+    <div
+      style={{ gridTemplateRows: "10% 50% 40%" }}
+      className={`grid items-center ${
+        isResting ? "bg-rose-900" : "bg-sky-900"
+      } h-full w-full flex flex-col`}
+    >
+      <div className="title-area text-4xl">
+        {/* <h2>{exercises[index].name}</h2> */}
+      </div>
+
+      <div className="image-area">
+        {exercises[index].img && (
           <img
             style={{ maxWidth: "100%" }}
-            src={`/${nextExercise.img}`}
+            className="m-auto"
+            src={`/${exercises[index].img}`}
             alt="execise"
           />
-        </>
-      )}
-      {nextExercise && <p>Remaining: {exercisesRemaining}</p>}
-      {!!nextTime && (
-        <Timer
-          expireTime={nextTime}
-          onExpire={onExpire}
-          duration={exercises[index].seconds}
-        />
-      )}
-      <div>
-        <button onClick={() => setIndex((i) => i - 1)}>Pre</button>
-        <button onClick={() => setIndex((i) => i + 1)}>Next</button>
+        )}
+
+        {nextExercise && isResting && (
+          <>
+            <img
+              style={{ maxWidth: "100%" }}
+              src={`/${nextExercise.img}`}
+              className="m-auto"
+              alt="execise"
+            />
+            <p>Next: {nextExercise.name}</p>
+          </>
+        )}
       </div>
-    </>
+
+      <div className="controls-area">
+        {nextExercise && <p>Remaining: {exercisesRemaining}</p>}
+        <div className="">
+          {!!nextTime && (
+            <Timer
+              expireTime={nextTime}
+              onExpire={onExpire}
+              duration={exercises[index].seconds}
+            />
+          )}
+        </div>
+
+        <div className="flex justify-around items-center m-2 content-center">
+          <Button className="w-2/5" onClick={() => setIndex((i) => i - 1)}>
+            Pre
+          </Button>
+          <Button className="w-2/5" onClick={() => setIndex((i) => i + 1)}>
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
 

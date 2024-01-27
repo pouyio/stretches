@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useTimer } from "react-timer-hook";
+import { Button } from "./Button";
 
 export const Timer: React.FC<{
   expireTime: Date;
@@ -19,7 +20,7 @@ export const Timer: React.FC<{
   const progress = (duration - totalSeconds) / duration;
 
   return (
-    <>
+    <div className="m-2">
       <p>
         {minutes.toLocaleString("en-US", {
           minimumIntegerDigits: 2,
@@ -34,11 +35,17 @@ export const Timer: React.FC<{
       <p>
         <progress id="file" value={progress} max="1" />
       </p>
-      {isRunning ? (
-        <button onClick={pause}>Pause</button>
-      ) : (
-        <button onClick={resume}>Resume</button>
-      )}
-    </>
+      <div className="">
+        {isRunning ? (
+          <Button className="w-2/5" onClick={pause}>
+            Pause
+          </Button>
+        ) : (
+          <Button className="w-2/5" onClick={resume}>
+            Resume
+          </Button>
+        )}
+      </div>
+    </div>
   );
 };
