@@ -61,7 +61,6 @@ const App = () => {
 
   const isResting = name === "Rest";
 
-  exercises;
   const exercisesRemaining = exercises
     .slice(index)
     .filter((e) => e.name !== "Rest").length;
@@ -69,12 +68,10 @@ const App = () => {
   return (
     <div
       style={{ gridTemplateRows: "10% 50% 40%" }}
-      className={`grid items-center ${
-        isResting ? "bg-rose-900" : "bg-sky-900"
-      } h-full w-full flex flex-col`}
+      className={`grid items-center h-full w-full flex flex-col`}
     >
       <div className="title-area text-4xl">
-        {/* <h2>{exercises[index].name}</h2> */}
+        <h2>{exercises[index].name}</h2>
       </div>
 
       <div className="image-area">
@@ -105,6 +102,7 @@ const App = () => {
         <div className="">
           {!!nextTime && (
             <Timer
+              resting={isResting}
               expireTime={nextTime}
               onExpire={onExpire}
               duration={exercises[index].seconds}
