@@ -23,19 +23,22 @@ export const Timer: React.FC<{
   return (
     <>
       <div className="m-4">
-        <p>
-          {minutes.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-          :
-          {seconds.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-        </p>
-        {isRunning ? (
-          <Button className="w-full inline-flex justify-center" onClick={pause}>
+        <Button
+          className="w-full inline-flex justify-center items-center"
+          onClick={() => (isRunning ? pause() : resume())}
+        >
+          <p className="text-xl mr-2">
+            {minutes.toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            })}
+            :
+            {seconds.toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            })}
+          </p>
+          {isRunning ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -48,12 +51,7 @@ export const Timer: React.FC<{
                 clipRule="evenodd"
               />
             </svg>
-          </Button>
-        ) : (
-          <Button
-            className="w-full inline-flex justify-center"
-            onClick={resume}
-          >
+          ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -66,12 +64,12 @@ export const Timer: React.FC<{
                 clipRule="evenodd"
               />
             </svg>
-          </Button>
-        )}
+          )}
+        </Button>
       </div>
       <div
         style={{ width: `100%`, zIndex: -1 }}
-        className={`absolute top-0 h-screen bg-pink-900`}
+        className={`absolute top-0 left-0 h-screen bg-pink-900`}
       >
         <div
           style={{
