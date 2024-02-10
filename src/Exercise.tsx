@@ -3,14 +3,14 @@ import { useWakeLock } from "react-screen-wake-lock";
 // @ts-ignore
 import useSound from "use-sound";
 
-import endExercise from "./assets/end_exercise.wav";
-import end from "./assets/end.wav";
-import { exercises } from "./assets/exercises";
-import { Timer } from "./components/Timer";
-import { Button } from "./components/Button";
+import ConfettiExplosion from "react-confetti-explosion";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import ConfettiExplosion from "react-confetti-explosion";
+import end from "./assets/end.wav";
+import endExercise from "./assets/end_exercise.wav";
+import { Step, exercises } from "./assets/exercises";
+import { Button } from "./components/Button";
+import { Timer } from "./components/Timer";
 
 const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
   title,
@@ -18,7 +18,7 @@ const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
 }) => {
   return (
     <div
-      style={{ gridTemplateRows: "10% auto 35%" }}
+      style={{ gridTemplateRows: "4.5rem auto 12.5rem" }}
       className={`grid w-full h-full items-stretch`}
     >
       <div className="title-area text-2xl font-bold px-4 flex items-center">
@@ -39,6 +39,51 @@ const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
         </Link>
       </div>
       {children}
+    </div>
+  );
+};
+
+const PreviewItem: React.FC<{ step: Step }> = ({ step }) => {
+  return (
+    <div className="m-1 rounded bg-zinc-700 h-full flex flex-col justify-center font-light">
+      <img className="p-2" src={`/${step.img}`} alt="execise" />
+      {step.name} <br />
+      {step.seconds ? (
+        <span className="inline-flex mx-auto">
+          {step.seconds}{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </span>
+      ) : null}
+      {step.repetitions ? (
+        <span className="inline-flex m-auto">
+          {step.repetitions}{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.097 1.515a.75.75 0 0 1 .589.882L10.666 7.5h4.47l1.079-5.397a.75.75 0 1 1 1.47.294L16.665 7.5h3.585a.75.75 0 0 1 0 1.5h-3.885l-1.2 6h3.585a.75.75 0 0 1 0 1.5h-3.885l-1.08 5.397a.75.75 0 1 1-1.47-.294l1.02-5.103h-4.47l-1.08 5.397a.75.75 0 1 1-1.47-.294l1.02-5.103H3.75a.75.75 0 0 1 0-1.5h3.885l1.2-6H5.25a.75.75 0 0 1 0-1.5h3.885l1.08-5.397a.75.75 0 0 1 .882-.588ZM10.365 9l-1.2 6h4.47l1.2-6h-4.47Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      ) : null}
     </div>
   );
 };
@@ -89,7 +134,17 @@ export const Exercise = () => {
   if (index === -1) {
     return (
       <ExerciseContainer title={id}>
-        <div>placeholder preview!</div>
+        <div className="overflow-y-auto">
+          <ul className="flex flex-wrap">
+            {exercise.steps
+              .filter((step) => step.name !== "Rest")
+              .map((step) => (
+                <li className="w-1/2 p-1">
+                  <PreviewItem step={step} />
+                </li>
+              ))}
+          </ul>
+        </div>
         <div className="self-end mb-10 inline-flex">
           <Button
             className="m-4 w-full inline-flex justify-center "
