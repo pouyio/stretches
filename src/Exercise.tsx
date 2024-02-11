@@ -46,18 +46,18 @@ const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
 const PreviewItem: React.FC<{ step: Step }> = ({ step }) => {
   return (
     <div className="m-1 rounded bg-zinc-700 h-full flex flex-col justify-center font-light">
-      <img className="p-2" src={`/${step.img}`} alt="execise" />
+      {step.img && <img className="p-2" src={`/${step.img}`} alt="execise" />}
       {step.name} <br />
       {step.seconds ? (
         <span className="inline-flex mx-auto">
           {step.seconds}{" "}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="http:// items-centerwww.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-5 h-5"
           >
             <path
               strokeLinecap="round"
@@ -68,13 +68,13 @@ const PreviewItem: React.FC<{ step: Step }> = ({ step }) => {
         </span>
       ) : null}
       {step.repetitions ? (
-        <span className="inline-flex m-auto">
+        <span className="inline-flex m-auto items-center">
           {step.repetitions}{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-6 h-6"
+            className="w-5 h-5"
           >
             <path
               fillRule="evenodd"
@@ -135,6 +135,9 @@ export const Exercise = () => {
     return (
       <ExerciseContainer title={id}>
         <div className="overflow-y-auto">
+          {exercise.description && (
+            <p className="mb-4 font-light">{exercise.description}</p>
+          )}
           <ul className="flex flex-wrap">
             {exercise.steps
               .filter((step) => step.name !== "Rest")
@@ -195,12 +198,14 @@ export const Exercise = () => {
 
           {nextExercise && isResting && (
             <>
-              <img
-                style={{ maxWidth: "100%" }}
-                src={`/${nextExercise.img}`}
-                className="m-auto"
-                alt="execise"
-              />
+              {nextExercise.img && (
+                <img
+                  style={{ maxWidth: "100%" }}
+                  src={`/${nextExercise.img}`}
+                  className="m-auto"
+                  alt="execise"
+                />
+              )}
               <p>Next: {nextExercise.name}</p>
             </>
           )}
