@@ -123,10 +123,25 @@ export const Exercise = () => {
     release();
     return (
       <ExerciseContainer>
-        <h1 className="row-span-2 self-center text-4xl m-auto">
-          <ConfettiExplosion duration={4000} />
-          Finished!!
-        </h1>
+        <div className="image-area">
+          <div className="flex h-full">
+            <h1 className="row-span-2 self-center text-4xl m-auto">
+              <ConfettiExplosion duration={4000} />
+              Finished!!
+            </h1>
+          </div>
+        </div>
+        <div className="controls-area">
+          <div className="inline-flex items-center">
+            <Button
+              className="m-4 w-full inline-flex justify-center"
+              onClick={() => setIndex(1)}
+            >
+              Retry?
+            </Button>
+
+          </div>
+        </div>
       </ExerciseContainer>
     );
   }
@@ -206,7 +221,12 @@ export const Exercise = () => {
                   alt="execise"
                 />
               )}
-              <p>Next: {nextExercise.name}</p>
+              <p>
+                Next: {nextExercise.name}{" "}
+                {nextExercise.seconds
+                  ? nextExercise.seconds
+                  : nextExercise.repetitions}
+              </p>
             </>
           )}
         </div>
