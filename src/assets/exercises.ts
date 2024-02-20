@@ -28,7 +28,7 @@ export const exercises: Record<string, Exercise> = {
       { name: "Cervico-Thoracic Traction", seconds: 120, img: "6.png" },
     ],
   },
-  "Calisthenics 1": {
+  "Calisthenics full body 1": {
     description: "2-4 series",
     steps: [
       { name: "Calentamiento", seconds: 4 * 60 },
@@ -46,6 +46,28 @@ export const exercises: Record<string, Exercise> = {
       { name: "Escaladores", seconds: 30 },
       { name: "Rest", seconds: 40 },
       { name: "flexiones en pica", repetitions: 8 },
+    ],
+  },
+  "Calisthenics full body 2": {
+    description: "3-6 series\nSe necesita una silla",
+    steps: [
+      { name: "Calentamiento", seconds: 4 * 60 },
+      { name: "Rest", seconds: 40 },
+      { name: "Plancha lateral", seconds: 30 },
+      { name: "Rest", seconds: 40 },
+      { name: "Dominada isométrica toalla", seconds: 30 },
+      { name: "Rest", seconds: 40 },
+      { name: "Sentadillas sumo", repetitions: 10 },
+      { name: "Rest", seconds: 40 },
+      { name: "Fondos trícpes", repetitions: 12 },
+      { name: "Rest", seconds: 40 },
+      { name: "Flexiones espalda", repetitions: 6 },
+      { name: "Rest", seconds: 40 },
+      { name: "Sentadillas pared", seconds: 30 },
+      { name: "Rest", seconds: 40 },
+      { name: "Flexiones negativas", repetitions: 6 },
+      { name: "Rest", seconds: 40 },
+      { name: "Elevación glúteos", repetitions: 10 },
     ],
   },
 };
