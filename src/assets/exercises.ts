@@ -32,6 +32,7 @@ export const exercises: Record<string, Exercise> = {
     description: "2-4 series",
     steps: [
       { name: "Calentamiento", seconds: 4 * 60 },
+      { name: "Rest", seconds: 1 * 60 },
       { name: "Plancha", seconds: 30 },
       { name: "Rest", seconds: 40 },
       { name: "Sentadillas", repetitions: 8 },
