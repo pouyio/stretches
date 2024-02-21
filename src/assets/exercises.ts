@@ -53,7 +53,9 @@ export const exercises: Record<string, Exercise> = {
     steps: [
       { name: "Calentamiento", seconds: 4 * 60 },
       { name: "Rest", seconds: 40 },
-      { name: "Plancha lateral", seconds: 30 },
+      { name: "Plancha lateral izquierda", seconds: 30 },
+      { name: "Rest", seconds: 15 },
+      { name: "Plancha lateral derecha", seconds: 30 },
       { name: "Rest", seconds: 40 },
       { name: "Dominada isométrica toalla", seconds: 30 },
       { name: "Rest", seconds: 40 },
