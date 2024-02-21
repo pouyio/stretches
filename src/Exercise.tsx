@@ -106,7 +106,7 @@ export const Exercise = () => {
           <div className="inline-flex items-center">
             <Button
               className="m-4 w-full inline-flex justify-center"
-              onClick={() => setIndex(1)}
+              onClick={() => setIndex(-1)}
             >
               Retry?
             </Button>
