@@ -72,4 +72,22 @@ export const exercises: Record<string, Exercise> = {
       { name: "Elevación glúteos", repetitions: 10 },
     ],
   },
+  "Calisthenics pierna": {
+    description: "4 series",
+    steps: [
+      { name: "Calentamiento", seconds: 4 * 60 },
+      { name: "Rest", seconds: 40 },
+      { name: "Sentadillas", repetitions: 10 },
+      { name: "Rest", seconds: 30 },
+      { name: "Sentadillas arqueras", repetitions: 10 },
+      { name: "Rest", seconds: 30 },
+      { name: "Elevación gemelos a 1 pierna", repetitions: 12 },
+      { name: "Rest", seconds: 30 },
+      { name: "Zancadas", repetitions: 10 },
+      { name: "Rest", seconds: 30 },
+      { name: "Sentadillas con salto", repetitions: 10 },
+      { name: "Rest", seconds: 30 },
+      { name: "Caminata pato", repetitions: 10 },
+    ],
+  },
 };
