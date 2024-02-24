@@ -44,7 +44,7 @@ const PreviewItem: React.FC<{ step: Step }> = ({ step }) => {
       {step.img && <img className="p-2" src={`/${step.img}`} alt="execise" />}
       {step.name} <br />
       {step.seconds ? (
-        <span className="inline-flex mx-auto">
+        <span className="inline-flex mx-auto items-center">
           {step.seconds}{" "}
           <TimeIcon />
         </span>
@@ -180,7 +180,7 @@ export const Exercise = () => {
                   alt="execise"
                 />
               )}
-              <p className="inline-flex">
+              <p className="inline-flex items-center">
                 Next: {nextExercise.name}{" "}
                 {nextExercise.seconds
                   ? nextExercise.seconds
@@ -197,7 +197,7 @@ export const Exercise = () => {
           {exercise.steps[index].repetitions && (
             <div className="inline-flex items-center">
               <p className="text-4xl">{exercise.steps[index].repetitions}</p>
-              <NumberIcon />
+              <NumberIcon big />
             </div>
           )}
           {exercise.steps[index].seconds && (
