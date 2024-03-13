@@ -10,6 +10,9 @@ export const App: React.FC = () => {
           <Link to={e}>{e}</Link>
         </li>
       ))}
+      <li className="bg-gray-700 rounded-full px-6 py-1 my-2">
+        <Link to="/settings">Settings</Link>
+      </li>
     </ul>
   );
 };
