@@ -40,13 +40,9 @@ export const Timer: React.FC<{
               useGrouping: false,
             })}
           </p>
-          {isRunning ? (
-            <PauseIcon />
-          ) : (
-            <PlayIcon />
-          )}
+          {isRunning ? <PauseIcon /> : <PlayIcon />}
         </Button>
-      </div >
+      </div>
       <div
         style={{ width: `100%`, zIndex: -1 }}
         className={`absolute top-0 left-0 h-screen bg-pink-900`}
@@ -56,8 +52,9 @@ export const Timer: React.FC<{
             width: `${progress * 100}%`,
             zIndex: 5,
           }}
-          className={`absolute h-full ${isRunning ? "duration-1000 ease-linear" : ""
-            } bg-sky-900 ${resting ? "right-0" : "left-0"} `}
+          className={`absolute h-full ${
+            isRunning ? "duration-1000 ease-linear" : ""
+          } bg-sky-900 ${resting ? "right-0" : "left-0"} `}
         ></div>
       </div>
     </>

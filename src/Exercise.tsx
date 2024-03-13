@@ -18,10 +18,14 @@ import { CloseIcon } from "./components/icons/CloseIcon";
 import { PrevIcon } from "./components/icons/PrevIcon";
 import { NextIcon } from "./components/icons/NextIcon";
 
-const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
-  title,
-  children,
-}) => {
+const ExerciseContainer: React.FC<
+  PropsWithChildren<{
+    title?: string;
+    totalSteps: number;
+    currentStep: number;
+  }>
+> = ({ title, totalSteps, currentStep, children }) => {
+  const percentage = (currentStep * 100) / (totalSteps - 1);
   return (
     <div
       style={{ gridTemplateRows: "4.5rem auto 12.5rem" }}
@@ -32,6 +36,25 @@ const ExerciseContainer: React.FC<PropsWithChildren<{ title?: string }>> = ({
         <Link to="/">
           <CloseIcon />
         </Link>
+      </div>
+      <div className={`flex flex-col h-1 ${totalSteps ? "" : "hidden"}`}>
+        <progress max="100" value={percentage} className="w-full h-1 rounded" />
+        <div className="flex w-full place-content-between h-1">
+          {Array(totalSteps)
+            .fill(0)
+            .map((mark: number, index) => (
+              <div
+                key={mark}
+                className={
+                  [0, totalSteps - 1].includes(index)
+                    ? "opacity-0"
+                    : "" +
+                      " h-1 w-1 rounded-b-lg " +
+                      (currentStep >= index ? "bg-blue-600" : "bg-gray-300")
+                }
+              ></div>
+            ))}
+        </div>
       </div>
       {children}
     </div>
@@ -45,14 +68,12 @@ const PreviewItem: React.FC<{ step: Step }> = ({ step }) => {
       {step.name} <br />
       {step.seconds ? (
         <span className="inline-flex mx-auto items-center">
-          {step.seconds}{" "}
-          <TimeIcon />
+          {step.seconds} <TimeIcon />
         </span>
       ) : null}
       {step.repetitions ? (
         <span className="inline-flex m-auto items-center">
-          {step.repetitions}{" "}
-          <NumberIcon />
+          {step.repetitions} <NumberIcon />
         </span>
       ) : null}
     </div>
@@ -74,7 +95,7 @@ export const Exercise = () => {
     }
     const time = new Date();
     time.setSeconds(
-      time.getSeconds() + (exercise.steps.at(index)?.seconds ?? 0)
+      time.getSeconds() + (exercise.steps.at(index)?.seconds ?? 0),
     );
     setNextTime(time);
   }, [index]);
@@ -93,7 +114,7 @@ export const Exercise = () => {
     playEnd();
     release();
     return (
-      <ExerciseContainer>
+      <ExerciseContainer currentStep={0} totalSteps={0}>
         <div className="image-area">
           <div className="flex h-full">
             <h1 className="row-span-2 self-center text-4xl m-auto">
@@ -110,7 +131,6 @@ export const Exercise = () => {
             >
               Retry?
             </Button>
-
           </div>
         </div>
       </ExerciseContainer>
@@ -119,16 +139,18 @@ export const Exercise = () => {
 
   if (index === -1) {
     return (
-      <ExerciseContainer title={id}>
+      <ExerciseContainer title={id} currentStep={0} totalSteps={0}>
         <div className="overflow-y-auto">
           {exercise.description && (
-            <p className="mb-4 font-light whitespace-pre">{exercise.description}</p>
+            <p className="mb-4 font-light whitespace-pre">
+              {exercise.description}
+            </p>
           )}
           <ul className="flex flex-wrap">
             {exercise.steps
               .filter((step) => step.name !== "Rest")
-              .map((step) => (
-                <li className="w-1/2 p-1">
+              .map((step, index) => (
+                <li className="w-1/2 p-1" key={index}>
                   <PreviewItem step={step} />
                 </li>
               ))}
@@ -158,7 +180,11 @@ export const Exercise = () => {
   const isResting = name === "Rest";
 
   return (
-    <ExerciseContainer title={exercise.steps[index].name}>
+    <ExerciseContainer
+      title={exercise.steps[index].name}
+      currentStep={index}
+      totalSteps={exercise.steps.length}
+    >
       <>
         <div className="image-area self-center">
           {exercise.steps[index].img && (
@@ -185,9 +211,7 @@ export const Exercise = () => {
                 {nextExercise.seconds
                   ? nextExercise.seconds
                   : nextExercise.repetitions}
-                {nextExercise.seconds
-                  ? <TimeIcon />
-                  : <NumberIcon />}
+                {nextExercise.seconds ? <TimeIcon /> : <NumberIcon />}
               </p>
             </>
           )}
