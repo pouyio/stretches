@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useWakeLock } from "react-screen-wake-lock";
 // @ts-ignore
 import useSound from "use-sound";
@@ -8,7 +13,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import end from "./assets/end.wav";
 import endExercise from "./assets/end_exercise.wav";
-import { Step, exercises } from "./assets/exercises";
+import { Step } from "./assets/exercises";
 import { Button } from "./components/Button";
 import { Timer } from "./components/Timer";
 import { NumberIcon } from "./components/icons/NumberIcon";
@@ -17,6 +22,7 @@ import { LaunchIcon } from "./components/icons/LaunchIcon";
 import { CloseIcon } from "./components/icons/CloseIcon";
 import { PrevIcon } from "./components/icons/PrevIcon";
 import { NextIcon } from "./components/icons/NextIcon";
+import { ExercisesContext } from "./contexts/ExercisesContext";
 
 const ExerciseContainer: React.FC<
   PropsWithChildren<{
@@ -87,6 +93,7 @@ export const Exercise = () => {
   const { request, release } = useWakeLock();
   const [playExercise] = useSound(endExercise);
   const [playEnd] = useSound(end, { volume: 0.1 });
+  const { exercises } = useContext(ExercisesContext);
   const exercise = exercises[id];
 
   useEffect(() => {

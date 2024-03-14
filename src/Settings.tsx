@@ -1,22 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "./components/Button";
-import { Exercise, exercises } from "./assets/exercises";
+import { Exercise } from "./assets/exercises";
+import { ExercisesContext } from "./contexts/ExercisesContext";
+import { Link } from "react-router-dom";
+import { CloseIcon } from "./components/icons/CloseIcon";
 
 // TODO improve UI. First select Exercise only modify one at a time
-const getInitialValue = (): string => {
-  const userExercises = localStorage.getItem("userExercises") ?? "";
-  if (userExercises) {
-    return userExercises;
-  } else {
-    return JSON.stringify(exercises, undefined, 4);
-  }
-};
 export const Settings = () => {
+  const { exercises, saveExercises, resetExercises } =
+    useContext(ExercisesContext);
+
   const [localExercisesRaw, setLocalExercisesRaw] = useState<string>("");
 
   useEffect(() => {
-    setLocalExercisesRaw(getInitialValue());
-  }, []);
+    setLocalExercisesRaw(JSON.stringify(exercises, undefined, 4));
+  }, [exercises]);
 
   const onValueChange = (newValue: string) => {
     setLocalExercisesRaw(newValue);
@@ -24,6 +22,7 @@ export const Settings = () => {
 
   const onSave = () => {
     if (validate(localExercisesRaw)) {
+      saveExercises(JSON.parse(localExercisesRaw) as Record<string, Exercise>);
       localStorage.setItem("userExercises", localExercisesRaw);
     } else {
       console.log("ha fallado el parseo");
@@ -31,7 +30,7 @@ export const Settings = () => {
   };
 
   const onReset = () => {
-    setLocalExercisesRaw(getInitialValue());
+    setLocalExercisesRaw(JSON.stringify(exercises, undefined, 4));
   };
 
   const validate = (value: string): boolean => {
@@ -45,18 +44,32 @@ export const Settings = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-92">
-      <h1>Settings</h1>
-      <h2>Custom settings</h2>
-      <textarea
-        className="text-black"
-        onChange={(e) => onValueChange(e.target.value)}
-        value={localExercisesRaw}
-      />
-      <div>
-        <Button onClick={onReset}>Reset</Button>
+    <div
+      style={{ gridTemplateRows: "4.5rem auto 12.5rem" }}
+      className={`grid w-full h-full items-stretch`}
+    >
+      <div className="title-area text-2xl font-bold px-4 flex items-center">
+        <h1 className="flex-1">Settings</h1>
+        <Link to="/">
+          <CloseIcon />
+        </Link>
+      </div>
+      <div className="image-area flex flex-col w-full">
+        <textarea
+          className="text-black h-full"
+          onChange={(e) => onValueChange(e.target.value)}
+          value={localExercisesRaw}
+        />
+      </div>
+      <div className="controls-area">
+        <Button onClick={resetExercises}>Delete local</Button>
+        <Button onClick={onReset}>Reset form</Button>
         <Button
-          disabled={!localExercisesRaw || !validate(localExercisesRaw)}
+          disabled={
+            !localExercisesRaw ||
+            !validate(localExercisesRaw) ||
+            localExercisesRaw === JSON.stringify(exercises, undefined, 4)
+          }
           onClick={onSave}
         >
           Save

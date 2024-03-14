@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import "./App.css";
-import { exercises } from "./assets/exercises";
+import { useContext } from "react";
+import { ExercisesContext } from "./contexts/ExercisesContext";
 
 export const App: React.FC = () => {
+  const { exercises } = useContext(ExercisesContext);
   return (
     <ul>
       {Object.keys(exercises).map((e) => (

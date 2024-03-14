@@ -5,6 +5,7 @@ import { App } from "./App";
 import { Exercise } from "./Exercise";
 import { Settings } from "./Settings";
 import "./index.css";
+import { ExercisesProvider } from "./contexts/ExercisesContext";
 
 const routes = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,6 +15,8 @@ const routes = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={routes} />
-  </React.StrictMode>
+    <ExercisesProvider>
+      <RouterProvider router={routes} />
+    </ExercisesProvider>
+  </React.StrictMode>,
 );
