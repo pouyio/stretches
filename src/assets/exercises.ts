@@ -75,7 +75,7 @@ export const exercises: Record<string, Exercise> = {
   "Calisthenics pierna": {
     description: "4 series",
     steps: [
-      { name: "Calentamiento", seconds: 4 * 60 },
+      { name: "Calentamiento", seconds: 4 * 60, img: "piernas-warm-up.png" },
       { name: "Rest", seconds: 40 },
       { name: "Sentadillas", repetitions: 10 },
       { name: "Rest", seconds: 30 },
