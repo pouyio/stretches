@@ -43,8 +43,8 @@ const ExerciseContainer: React.FC<
           <CloseIcon />
         </Link>
       </div>
-      <div className={`flex flex-col h-1 ${totalSteps ? "" : "hidden"}`}>
-        <progress max="100" value={percentage} className="w-full h-1 rounded" />
+      <div className={`flex flex-col h-2 ${totalSteps ? "" : "hidden"}`}>
+        <progress max="100" value={percentage} className="w-full h-2 rounded" />
         <div className="flex w-full place-content-between h-1">
           {Array(totalSteps)
             .fill(0)
@@ -56,7 +56,7 @@ const ExerciseContainer: React.FC<
                     ? "opacity-0"
                     : "" +
                       " h-1 w-1 rounded-b-lg " +
-                      (currentStep >= index ? "bg-blue-600" : "bg-gray-300")
+                      (currentStep >= index ? "bg-green-700" : "bg-gray-300")
                 }
               ></div>
             ))}

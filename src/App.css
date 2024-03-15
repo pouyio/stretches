@@ -5,3 +5,13 @@
   padding: 2rem;
   text-align: center;
 }
+
+progress::-webkit-progress-value {
+  @apply bg-green-700;
+}
+progress::-moz-progress-bar {
+  @apply bg-green-700;
+}
+progress::-webkit-progress-bar {
+  @apply bg-gray-300;
+}

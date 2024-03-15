@@ -18,9 +18,8 @@ const validate = (value: string): boolean => {
 };
 
 export const ExercisesProvider = ({ children }: { children: ReactNode }) => {
-  const [localExercises, setLocalExercises] = useState<
-    Record<string, Exercise>
-  >({});
+  const [localExercises, setLocalExercises] =
+    useState<Record<string, Exercise>>(exercises);
 
   useEffect(() => {
     const userExercises = localStorage.getItem("userExercises") ?? "";
