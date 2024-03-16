@@ -7,7 +7,7 @@ export const ExercisesContext = createContext<{
   resetExercises: () => void;
 }>({ saveExercises: () => {}, exercises: {}, resetExercises: () => {} });
 
-const validate = (value: string): boolean => {
+export const validate = (value: string): boolean => {
   try {
     JSON.parse(value) as Record<string, Exercise>;
     return true;
