@@ -35,31 +35,41 @@ const ExerciseContainer: React.FC<
   return (
     <div
       style={{ gridTemplateRows: "4.5rem auto 12.5rem" }}
-      className={`grid w-full h-full items-stretch`}
+      className={`grid w-full h-full`}
     >
       <div className="title-area text-2xl font-bold px-4 flex items-center">
-        <h1 className="flex-1">{title ? title : ""}</h1>
-        <Link to="/">
-          <CloseIcon />
-        </Link>
-      </div>
-      <div className={`flex flex-col h-2 ${totalSteps ? "" : "hidden"}`}>
-        <progress max="100" value={percentage} className="w-full h-2 rounded" />
-        <div className="flex w-full place-content-between h-1">
-          {Array(totalSteps)
-            .fill(0)
-            .map((mark: number, index) => (
-              <div
-                key={mark}
-                className={
-                  [0, totalSteps - 1].includes(index)
-                    ? "opacity-0"
-                    : "" +
-                      " h-1 w-1 rounded-b-lg " +
-                      (currentStep >= index ? "bg-green-700" : "bg-gray-300")
-                }
-              ></div>
-            ))}
+        <div className="flex flex-col w-full h-full">
+          <div className="flex items-center flex-1">
+            <h1 className="flex-1">{title ? title : ""}</h1>
+            <Link to="/">
+              <CloseIcon />
+            </Link>
+          </div>
+          <div className={`flex flex-col ${totalSteps ? "" : "hidden"}`}>
+            <progress
+              max="100"
+              value={percentage}
+              className="w-full h-2 rounded"
+            />
+            <div className="flex w-full place-content-between h-1">
+              {Array(totalSteps)
+                .fill(0)
+                .map((mark: number, index) => (
+                  <div
+                    key={mark}
+                    className={
+                      [0, totalSteps - 1].includes(index)
+                        ? "opacity-0"
+                        : "" +
+                          " h-1 w-1 rounded-b-lg " +
+                          (currentStep >= index
+                            ? "bg-green-700"
+                            : "bg-gray-300")
+                    }
+                  ></div>
+                ))}
+            </div>
+          </div>
         </div>
       </div>
       {children}
