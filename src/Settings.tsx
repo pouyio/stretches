@@ -51,8 +51,9 @@ export const Settings = () => {
   };
 
   const isDirty =
+    selectedKey &&
     JSON.stringify(localEditedExercise) !==
-    JSON.stringify(exercises[selectedKey]);
+      JSON.stringify(exercises[selectedKey]);
 
   return (
     <div

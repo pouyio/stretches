@@ -90,7 +90,7 @@ export const exercises: Record<string, Exercise> = {
       { name: "Caminata pato", repetitions: 10 },
     ],
   },
-  Simplified: {
+  "Simplified": {
     description: "3 series each",
     steps: [
       {
