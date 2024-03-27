@@ -90,4 +90,59 @@ export const exercises: Record<string, Exercise> = {
       { name: "Caminata pato", repetitions: 10 },
     ],
   },
+  Simplified: {
+    description: "3 series each",
+    steps: [
+      {
+        name: "Chest, knee pushup",
+        repetitions: 20,
+        img: "simplified/chest.PNG",
+      },
+      {
+        name: "Back, table row",
+        repetitions: 20,
+        img: "simplified/back.PNG",
+      },
+      {
+        name: "Shoulders, pike pushup",
+        repetitions: 20,
+        img: "simplified/shoulder.PNG",
+      },
+      {
+        name: "Biceps, curl",
+        repetitions: 20,
+        img: "simplified/biceps.PNG",
+      },
+      {
+        name: "Tripces, bench dips",
+        repetitions: 20,
+        img: "simplified/triceps.PNG",
+      },
+      {
+        name: "Shoulder isolation, lateral raise & rear delt fly",
+        repetitions: 20,
+        img: "simplified/shoulder.PNG",
+      },
+      {
+        name: "Quads, squat",
+        repetitions: 20,
+        img: "simplified/quads.PNG",
+      },
+      {
+        name: "Hamstrings, reverse lunge",
+        repetitions: 20,
+        img: "simplified/hamstring.PNG",
+      },
+      {
+        name: "Calves, calf raise",
+        repetitions: 20,
+        img: "simplified/calves.PNG",
+      },
+      {
+        name: "Abs, sit up/plank",
+        repetitions: 20,
+        img: "simplified/abs.PNG",
+      },
+    ],
+  },
 };
