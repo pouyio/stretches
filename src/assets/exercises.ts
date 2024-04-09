@@ -90,7 +90,7 @@ export const exercises: Record<string, Exercise> = {
       { name: "Caminata pato", repetitions: 10 },
     ],
   },
-  "Simplified": {
+  Simplified: {
     description: "3 series each",
     steps: [
       {
@@ -121,7 +121,7 @@ export const exercises: Record<string, Exercise> = {
       {
         name: "Shoulder isolation, lateral raise & rear delt fly",
         repetitions: 20,
-        img: "simplified/shoulder.PNG",
+        img: "simplified/lateral.PNG",
       },
       {
         name: "Quads, squat",
