@@ -94,9 +94,14 @@ export const exercises: Record<string, Exercise> = {
     description: "3 series each",
     steps: [
       {
-        name: "Chest, knee pushup",
+        name: "Chest, pushup",
         repetitions: 20,
         img: "simplified/chest.PNG",
+      },
+      {
+        name: "Quads, squat",
+        repetitions: 20,
+        img: "simplified/quads.PNG",
       },
       {
         name: "Back, table row",
@@ -104,14 +109,29 @@ export const exercises: Record<string, Exercise> = {
         img: "simplified/back.PNG",
       },
       {
+        name: "Hamstrings, reverse lunge",
+        repetitions: 20,
+        img: "simplified/hamstring.PNG",
+      },
+      {
         name: "Shoulders, pike pushup",
         repetitions: 20,
         img: "simplified/shoulder.PNG",
       },
       {
+        name: "Calves, calf raise",
+        repetitions: 20,
+        img: "simplified/calves.PNG",
+      },
+      {
         name: "Biceps, curl",
         repetitions: 20,
         img: "simplified/biceps.PNG",
+      },
+      {
+        name: "Abs, sit up/plank",
+        repetitions: 20,
+        img: "simplified/abs.PNG",
       },
       {
         name: "Tripces, bench dips",
@@ -122,26 +142,6 @@ export const exercises: Record<string, Exercise> = {
         name: "Shoulder isolation, lateral raise & rear delt fly",
         repetitions: 20,
         img: "simplified/lateral.PNG",
-      },
-      {
-        name: "Quads, squat",
-        repetitions: 20,
-        img: "simplified/quads.PNG",
-      },
-      {
-        name: "Hamstrings, reverse lunge",
-        repetitions: 20,
-        img: "simplified/hamstring.PNG",
-      },
-      {
-        name: "Calves, calf raise",
-        repetitions: 20,
-        img: "simplified/calves.PNG",
-      },
-      {
-        name: "Abs, sit up/plank",
-        repetitions: 20,
-        img: "simplified/abs.PNG",
       },
     ],
   },
